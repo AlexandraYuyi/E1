@@ -1,14 +1,12 @@
 package interfaz;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+//import com.sun.xml.internal.ws.util.StringUtils;
 import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 public class Logica {
 
     public static String mostrarMatriz(int[][] matriz){
-        String elemento="", m="";
+        String elemento, m="";
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
                 elemento= String.valueOf(matriz[i][j]);
@@ -89,23 +87,14 @@ public class Logica {
     }
 
     public static String invertirNumero(BigInteger numero){
-        byte[] bytes = numero.toByteArray();
-        byte[] reversedBytes = new byte[bytes.length];
-        for (int i = 0; i < bytes.length; i++) {
-        reversedBytes[i] = bytes[bytes.length - 1 - i];
-    }
-    BigInteger reversedBigInt = new BigInteger(reversedBytes);
-//        BigInteger invertido = new BigInteger("0");
-//        BigInteger mult;
-//        BigInteger mod;
-//        while(numero.intValue() > 0){
-//            mult = invertido.multiply(BigInteger.valueOf(10));
-//            mod = numero.mod(BigInteger.valueOf(10));
-//            invertido = mult.add(mod);
-//            numero = numero.divide(BigInteger.valueOf(10));
-//        }
-//        return String.valueOf(invertido);
-    return reversedBigInt.toString();
+        BigInteger num = numero;
+        if(numero.compareTo(BigInteger.ZERO) <0){
+            num = numero.negate();
+        }
+        String str = num.toString();
+        String reversedStr = new StringBuilder(str).reverse().toString();
+        
+        return reversedStr;
     }
 
     public static float promedioSumaDiagonalSecundaria(int[][] matriz){
