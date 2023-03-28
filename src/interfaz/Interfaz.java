@@ -13,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.math.BigInteger;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import java.math.BigInteger;
 
 public class Interfaz extends JFrame implements ActionListener {
     private JTextField input; 
@@ -149,7 +150,7 @@ public class Interfaz extends JFrame implements ActionListener {
         add(scrollpane1);
         
         matrizCuadro = new JTextArea();
-        matrizCuadro.setBounds(40,155,640,400);
+        matrizCuadro.setBounds(40,155,660,400);
         matrizCuadro.setFont(new Font("Verdana", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         matrizCuadro.setEditable(false);
         add(matrizCuadro);
@@ -174,7 +175,7 @@ public class Interfaz extends JFrame implements ActionListener {
                     
                     int[][] matriz = Logica.crearMatriz(entero);
                     int[] vector = Logica.crearVector(entero);
-                    int escalar = 0;
+                    BigInteger escalar;
                     float real = 0;
                     BigInteger potencia = new BigInteger("1");
                     
@@ -182,8 +183,8 @@ public class Interfaz extends JFrame implements ActionListener {
                     matrizCuadro.setText(Logica.mostrarMatriz(matriz));
                     vector = Logica.ordenarMatriz(matriz);
                     resultadoOrden.setText(Logica.mostrarVector(vector));
+                    resultadoMult.setText(String.valueOf(Logica.multiplicarColumna(matriz)));
                     escalar = Logica.multiplicarColumna(matriz);
-                    resultadoMult.setText(String.valueOf(escalar));
                     resultadoInvert.setText(Logica.invertirNumero(escalar));
                     real = Logica.promedioSumaDiagonalSecundaria(matriz);
                     resultadoProm.setText(Float.toString(real));

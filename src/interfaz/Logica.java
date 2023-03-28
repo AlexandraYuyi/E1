@@ -2,6 +2,8 @@ package interfaz;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class Logica {
 
@@ -10,7 +12,7 @@ public class Logica {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
                 elemento= String.valueOf(matriz[i][j]);
-                m=m+String.format("%-10s", elemento);
+                m=m+String.format("%4s      ", elemento);
             }
             m=m+"\n\n";
         }
@@ -25,7 +27,7 @@ public class Logica {
                 elemento= String.valueOf(vector[i-1]);
                 vectorAString= vectorAString+String.format("%4s",elemento);
                 vectorAString= vectorAString+",";
-                if(i%15==0){
+                if(i%14==0){
                     vectorAString= vectorAString+"\n";
                 }
             }
@@ -51,7 +53,7 @@ public class Logica {
     public static int[][] llenarMatriz(int[][] matriz){
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
-                matriz[i][j] = (int) (Math.random() * 999 + 1);
+                matriz[i][j] = (int) (Math.random() *1999 - 999);
             }
         }
         return matriz;
@@ -78,21 +80,32 @@ public class Logica {
         return ordenado;
     }
 
-     public static int multiplicarColumna(int[][] matriz){
-        int multiplicado = 1;
+     public static BigInteger multiplicarColumna(int[][] matriz){
+        BigInteger multiplicado = new BigInteger("1");
         for (int i = 0; i < matriz.length; i++) {
-            multiplicado *= matriz[i][0];
+            multiplicado = multiplicado.multiply(BigInteger.valueOf(matriz[i][0]));
         }
         return multiplicado;
     }
 
-    public static String invertirNumero(int numero){
-        int invertido = 0;
-        while(numero > 0){
-            invertido = invertido * 10 + numero % 10;
-            numero /= 10;
-        }
-        return String.valueOf(invertido);
+    public static String invertirNumero(BigInteger numero){
+        byte[] bytes = numero.toByteArray();
+        byte[] reversedBytes = new byte[bytes.length];
+        for (int i = 0; i < bytes.length; i++) {
+        reversedBytes[i] = bytes[bytes.length - 1 - i];
+    }
+    BigInteger reversedBigInt = new BigInteger(reversedBytes);
+//        BigInteger invertido = new BigInteger("0");
+//        BigInteger mult;
+//        BigInteger mod;
+//        while(numero.intValue() > 0){
+//            mult = invertido.multiply(BigInteger.valueOf(10));
+//            mod = numero.mod(BigInteger.valueOf(10));
+//            invertido = mult.add(mod);
+//            numero = numero.divide(BigInteger.valueOf(10));
+//        }
+//        return String.valueOf(invertido);
+    return reversedBigInt.toString();
     }
 
     public static float promedioSumaDiagonalSecundaria(int[][] matriz){
