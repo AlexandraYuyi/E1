@@ -102,15 +102,29 @@ public class Logica {
         float promedio = 0;
         for (int i = 0; i < matriz.length; i++) {
             suma += matriz[i][matriz.length - 1 - i];
+            // System.out.println("Indice: "+matriz[i][matriz.length - 1 - i]);
+            // System.out.println("Suma: "+suma);
         }
         promedio = (float)suma / matriz.length;
         return promedio;
     }
 
     public static BigInteger potenciaMenorMayor(int[] vector){
-        int mayor = vector[0];
-        int menor = vector[vector.length-1];
         BigInteger potencia = new BigInteger("1");
+        int menor = vector[0];
+        int mayor = vector[0];
+        for (int i = 0; i < vector.length; i++) {
+            if(vector[i]>0){
+                if(vector[i] < menor){
+                    menor = vector[i];
+                }
+                if(vector[i] > mayor){
+                    mayor = vector[i];
+                }
+            }
+        }
+        // System.out.println("Menor: "+menor);
+        // System.out.println("Mayor: "+mayor);
         potencia = BigInteger.valueOf(menor).pow(mayor);
         return potencia;
     }
